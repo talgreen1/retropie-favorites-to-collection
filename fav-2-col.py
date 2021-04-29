@@ -2,6 +2,10 @@ import xml.etree.ElementTree as ET
 import sys
 import os
 
+#todo: add print for output file name, and all added file
+#todo: if dest file name does not have .cfg, add it
+#todo: In usage - add info that the gameinfo file should be in the roms folder
+
 CUSTOM_COLLECTION_PATH = "/home/pi/.emulationstation/collections/"
 
 if len(sys.argv) != 3:
