@@ -2,13 +2,14 @@ import xml.etree.ElementTree as ET
 import sys
 import os
 
+CUSTOM_COLLECTION_PATH = "/home/pi/.emulationstation/collections/"
+
 if len(sys.argv) != 3:
-    print("Please enter 2 file names")
+    print(f"Usage: {os.path.basename(__file__)} <path to gamelist file> <collection file name>")
     sys.exit(-1)
 
-
 gamelist_file_name = sys.argv[1]
-collection_file_name = sys.argv[2]
+collection_file_name = CUSTOM_COLLECTION_PATH + sys.argv[2]
 
 if os.path.isfile(collection_file_name):
     print(f"file {collection_file_name} already exists. Please supply new file name")
@@ -28,5 +29,5 @@ for child in root.findall('game'):
         collection_file.write(gamelist_path + "\\" + child.find("path").text[2:] + "\n")
 
 collection_file.close()
-    # print(child.find("name").text)
-    # print(child. find("name").text)
+# print(child.find("name").text)
+# print(child. find("name").text)
