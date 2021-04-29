@@ -19,14 +19,14 @@ gamelist_file = open(gamelist_file_name)
 
 gamelist_path = os.path.dirname(os.path.abspath(gamelist_file_name))
 
-tree = ET.parse('./gamelist.xml')
+tree = ET.parse(gamelist_file_name)
 root = tree.getroot()
 
 for child in root.findall('game'):
     favorite = child.findall('favorite')
     if len(favorite) == 1:
-        print(gamelist_path + "\\" + child.find("path").text[2:])
-        collection_file.write(gamelist_path + "\\" + child.find("path").text[2:] + "\n")
+        print(gamelist_path + "/" + child.find("path").text[2:])
+        collection_file.write(gamelist_path + "/" + child.find("path").text[2:] + "\n")
 
 collection_file.close()
 # print(child.find("name").text)
