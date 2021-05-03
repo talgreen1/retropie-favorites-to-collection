@@ -19,8 +19,8 @@ def get_collection_file_name():
 
 
 if len(sys.argv) != 3:
-    print(f"Usage: {os.path.basename(__file__)} <full path to gamelist file> <Name of new collection file>\n")
-    print(f"Roms folder for gamelist files: {consts.ROMS_PATH}")
+    print(f"Usage: {os.path.basename(__file__)} <full_path_to-gamelist_file> <Name_of_new_collection_file>\n")
+    print(f"Note: Roms folder for gamelist files: {consts.ROMS_PATH}")
     sys.exit(-1)
 
 gamelist_file_name = sys.argv[1]
