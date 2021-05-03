@@ -11,24 +11,30 @@ import os
 
 if len(sys.argv) != 3:
     print(f"Usage: {os.path.basename(__file__)} <full path to gamelist file> <full path to new collection file>\n")
-    print(f"Roms folder for gamelist files: {consts.ROMS_PATH}\n")
-    print(f"Collections folder for new collection file: {consts.CUSTOM_COLLECTION_PATH}\n")
+    print(f"Roms folder for gamelist files: {consts.ROMS_PATH}")
+    print(f"Collections folder for new collection file: {consts.CUSTOM_COLLECTION_PATH}")
     sys.exit(-1)
 
 gamelist_file_name = sys.argv[1]
 collection_file_name = sys.argv[2]
+if not collection_file_name.endswith(".cfg"):
+    collection_file_name += ".cfg"
 
 if os.path.isfile(collection_file_name):
     print(f"file {collection_file_name} already exists. Please supply new file name")
     sys.exit(-1)
+
 collection_file = open(collection_file_name, "w+")
 gamelist_file = open(gamelist_file_name)
+
+print(f"Creating the following file:{collection_file_name}\n")
 
 gamelist_path = os.path.dirname(os.path.abspath(gamelist_file_name))
 
 tree = ET.parse(gamelist_file_name)
 root = tree.getroot()
 
+print(f"Adding the following games:\n")
 for child in root.findall('game'):
     favorite = child.findall('favorite')
     if len(favorite) == 1:
@@ -36,3 +42,5 @@ for child in root.findall('game'):
         collection_file.write(gamelist_path + "/" + child.find("path").text[2:] + "\n")
 
 collection_file.close()
+
+print("\nDone.")
