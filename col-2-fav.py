@@ -26,10 +26,17 @@ backup_gamelist_file()
 col_file = open(collection_file_name, 'r')
 col_lines = col_file.readlines()
 
-count = 0
-# Strips the newline character
+tree = ET.parse(gamelist_file_name)
+root = tree.getroot()
+
 for line in col_lines:
-    print(">" + line)
+    for child in root.findall('game'):
+        current_game = child.find('path').text[2:]
+        if line.strip().endswith(current_game):
+            child.set("favorite", "true")
+            print(f"We have a match: {current_game}")
+
+tree.write(gamelist_file_name)
 
 # gamelist_file_name = sys.argv[1]
 # collection_file_name = get_collection_file_name()
