@@ -33,8 +33,11 @@ for line in col_lines:
     for child in root.findall('game'):
         current_game = child.find('path').text[2:]
         if line.strip().endswith(current_game):
-            child.set("favorite", "true")
-            print(f"We have a match: {current_game}")
+            if child.find('favorite') is None:
+                fav_element = child.makeelement("favorite", {})
+                fav_element.text = "true"
+                child.append(fav_element)
+                print(f"Setting this game as favorite: {current_game}")
 
 tree.write(gamelist_file_name)
 
